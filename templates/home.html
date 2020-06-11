@@ -11,7 +11,11 @@
 		<link href="{% static 'css/jquery.flexdatalist.min.css'%}" rel="stylesheet" type="text/css">
 		{% load static %}
 		<script src="{% static 'js/jquery.flexdatalist.min.js' %}"></script>
-
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$(".flexdatalist").flexdatalist();
+		});
+	</script>	
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
