@@ -68,8 +68,7 @@ def postgrad(request):
 		for row in fileRead:
 			if row[0] == 'US':
 				uniList.append(row[1])
-	context = {'uniList': uniList,
-	  'numUnis': numChoices}
+	context = {'uniList': uniList}
 	return render(request, 'postgrad.html', context)
 
 def professional(request):

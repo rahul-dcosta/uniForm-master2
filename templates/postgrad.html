@@ -12,9 +12,26 @@
   <title>Postgraduate Options</title>
 </head>
 <body>
-  <h1>
-  Postgraduate
-  </h1>
+  <h1> Postgraduate </h1>
+
+  <form method="POST">
+			{% csrf_token %}
+			<label for="school">School: </label>
+			<input list="school" placeholder="School">
+			<datalist name="schoolChoice" id="school">
+				{% for school in uniList %}
+					<option>{{ school }}</option>
+				{% endfor %}
+			</datalist>
+      <label for="program">Program: </label>
+      <input list="programs" placeholder="Programs">
+			<datalist name="progChoice" id="program">
+				<option>Masters in Computer Science</option>
+			</datalist>
+
+			<br><br>
+			<input type="submit" name="selectedUnis">
+		</form>
 
 
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

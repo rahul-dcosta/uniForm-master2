@@ -8,11 +8,15 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
 
+    {% load static %}
+		<link href="{% static 'css/checkbox.css'%}" rel="stylesheet" type="text/css">
+
     <title>University Deadline Information</title>
   </head>
   <body>
-    <h1>Enter your details</h1>
+    <!-- <h1>Enter your details</h1> -->
 		<form method="POST">
+      <h1>Enter your details</h1>
 			{% csrf_token %}
 			Full Name: <input type="text" name="fullname">
 			<p></p>
@@ -33,7 +37,35 @@
 					<option>Professional</option>
 			</select>
 			<p></p>
+			<!-- <form action="/action_page.php"> -->
+			Select the tests you are planning to take:
+      <div class="container">
+      <ul class="ks-cboxtags">
+      <li>
+        <input type="checkbox" id="checkboxOne" value="SAT"><label for="checkboxOne">SAT</label>
+      </li>
+      <li>
+        <input type="checkbox" id="checkboxTwo" value="ACT"><label for="checkboxTwo">ACT</label>
+      </li>
+      <li>
+        <input type="checkbox" id="checkboxThree" value="IELTS"><label for="checkboxThree">IELTS</label>
+      </li>
+      <li>
+        <input type="checkbox" id="checkboxFour" value="TOEFL"><label for="checkboxFour">TOEFL</label>
+      </li>
+      </ul>
+      </div>
+			<p></p>
+			  <!-- <input type="checkbox" name="SATchoice" value="Bike">
+			  <label for="SATchoice"> Take the SAT?</label><br>
+			  <input type="checkbox" name="ACTchoice" value="Car">
+			  <label for="ACTchoice"> Take the ACT?</label><br>
+			  <input type="checkbox" name="engProf" value="Boat">
+			  <label for="engProf"> Complete English language proficiency tests?</label><br><br> -->
+			  <!-- <input type="submit" value="Submit"> -->
+			<!-- </form> -->
 			<input type="submit" name="personalInfo">
+
 		</form>
 
     <!-- Optional JavaScript -->

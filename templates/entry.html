@@ -1,0 +1,22 @@
+ {% load bootstrap4 %}
+
+<div class="control flex__align--start mt-10">
+      <label class="">Do you have any Certifications?</label>
+        {#{% bootstrap_field form.certification %}#}
+                <div class="border-gray flex__size--1">
+                <div class="flex__align--start">
+                <div class="search__wrapper">
+                <button class="btn btn-secondary circle" type="button">
+                <i class="fas fa-search"></i>
+                </button>
+                <div class="search-input none__d">
+                <input class="wp-100" type="text"
+                placeholder="Certificate Name" />
+                <span class="p-10 add_certificate"><i
+                class="fas fa-plus"></i></span>
+              </div>
+          </div>
+        </div>
+        {% bootstrap_field form.certification %}
+    </div>
+</div>
