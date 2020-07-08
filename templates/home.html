@@ -19,6 +19,13 @@
 			#checkShow2 {
 				display: none;
 			}
+			#checkShow3 {
+				display: none;
+			}
+			#checkShow4 {
+				display: none;
+			}
+
 		</style>
 
 	</head>
@@ -28,9 +35,11 @@
 			<h1>Choose your universities</h1>
 				{% csrf_token %}
 
+
 				 <input type="text"
 				 list="school"
 		     name="schoolChoice"
+				 style="width:300px;"
 				 />
 
 				<datalist id="school">
@@ -38,34 +47,54 @@
 						<option value="{{school}}"> {{ school }} </option>
 					{% endfor %}
 				</datalist>
-
+				<br></br>
 				<script>
 				var count = 1;
 				$("input[name=schoolChoice]").focusout(function(){
 						var value = $(this).val();
 						document.getElementById("myLink" + count).innerHTML = value;
-						document.getElementById("checkShow" + count).style.display = "block";
+						document.getElementById("checkShow" + count).style.display = "flex";
+						document.getElementById("checkShow" + count).style.float = "left";
+						document.getElementById("checkShow" + count).style.width = "230px";
+						document.getElementById("checkShow" + count).style.height = "150px";
 						count = count + 1;
 				});
 				</script>
 
-				<div class="container" id="checkShow">
-		  	<ul class="ks-cboxtags" id="checkShow1">
+				<div class="container" id="checkShow1">
+		  	<ul class="ks-cboxtags">
 		    <li>
 					<input type="checkbox" id="checkShow1" value="choiceOne" checked><label for="checkboxOne"><a id="myLink1"></a></label>
 				</li>
 				</ul>
-				<ul class="ks-cboxtags" id="checkShow2">
+				</div>
+
+				<div class="container" id="checkShow2">
+				<ul class="ks-cboxtags">
 		    <li>
 					<input type="checkbox" id="checkShow2" value="choiceTwo" checked><label for="checkboxTwo"><a id="myLink2"></a></label>
 				</li>
 				</ul>
 				</div>
 
-				<br></br>
+				<div class="container" id="checkShow3">
+				<ul class="ks-cboxtags">
+		    <li>
+					<input type="checkbox" id="checkShow3" value="choiceThree" checked><label for="checkboxThree"><a id="myLink3"></a></label>
+				</li>
+				</ul>
+				</div>
 
-				</script>
-				<input type="submit" name="selectedUnis">
+				<div class="container" id="checkShow4">
+				<ul class="ks-cboxtags">
+		    <li>
+					<input type="checkbox" id="checkShow4" value="choiceFour" checked><label for="checkboxFour"><a id="myLink4"></a></label>
+				</li>
+				</ul>
+				</div>
+
+				<br></br>
+				<input type="submit" name="selectedUnis" position: "fixed">
 
 		</form>
 
