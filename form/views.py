@@ -33,23 +33,34 @@ def home(request):
 def schools(request):
 	numChoices = []
 	currentUser = models.account.objects.last()
+	# if request.method == 'POST':
+	# 	if 'numChoicesSubmit' in request.POST:
+	# 		for i in range(int(request.POST['numChoices'])):
+	# 			numChoices.append(i + 1)
+	# 	elif 'selectedUnis' in request.POST:
+	# 		for i in range(len(request.POST) - 2):
+	# 			try:
+	# 				models.School.objects.get(title=request.POST['schoolChoice-' + str(i + 1)])
+	# 			except:
+	# 				s = models.School.objects.create(title=request.POST['schoolChoice-' + str(i + 1)])
+	# 				s.save()
+	# 				currentUser.schools.add(s)
+	# 				currentUser.save()
+	# 			else:
+	# 				currentUser.schools.add(models.School.objects.get(title=request.POST['schoolChoice-' + str(i + 1)]))
+	# 		return redirect('deadlines')
 	if request.method == 'POST':
-		if 'numChoicesSubmit' in request.POST:
-			for i in range(int(request.POST['numChoices'])):
-				numChoices.append(i + 1)
-		elif 'selectedUnis' in request.POST:
-			for i in range(len(request.POST) - 2):
-				try:
-					models.School.objects.get(title=request.POST['schoolChoice-' + str(i + 1)])
-				except:
-					s = models.School.objects.create(title=request.POST['schoolChoice-' + str(i + 1)])
-					s.save()
-					currentUser.schools.add(s)
-					currentUser.save()
-				else:
-					currentUser.schools.add(models.School.objects.get(title=request.POST['schoolChoice-' + str(i + 1)]))
-			return redirect('deadlines')
-
+		for i in range(4):
+			try:
+				models.School.objects.get(title=request.POST['myLink' + str(i + 1)])
+			except:
+				s = models.School.objects.create(title=request.POST['myLink' + str(i + 1)])
+				s.save()
+				currentUser.schools.add(s)
+				currentUser.save()
+			else:
+				currentUser.schools.add(models.School.objects.get(title=request.POST['schoolChoice-' + str(i + 1)]))
+		return redirect('deadlines')
 
 	uniList = []
 	with open('world-universities.csv', newline = '', encoding = 'utf-8') as file:

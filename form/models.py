@@ -11,16 +11,6 @@ class account(models.Model):
 	location = models.CharField(max_length=100)
 	schools = models.ManyToManyField(School) # ManyToMany Field is an important data type to understand.
 
-class university(models.Model):
-	certification = models.ManyToManyField('MentorCertificate', related_name="certificates")
-
-class MentorCertificate(models.Model):
-    title = models.CharField(max_length=256, unique=True, blank=False, null=False)
-    description = models.TextField(blank=True, null=True)
-
-    def __str__(self):
-        return f"{self.title}"
-
 
 # For foreign key, that specific data entry will be of a type of another class.
 # I'll give an example.
