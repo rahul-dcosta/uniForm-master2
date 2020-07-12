@@ -1,7 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from . import models
-import csv, copy
+import csv, copy, re
 
 def home(request):
 	cityList = []
@@ -19,7 +19,6 @@ def home(request):
 		email = request.POST['email']
 		location = request.POST['location']
 		type = request.POST['schoolType']
-		print(request.POST)
 		p = models.account.objects.create(fullname=fullname, email=email, location=location)
 		if type == 'Undergraduate':
 			return redirect('schools/')
@@ -33,33 +32,18 @@ def home(request):
 def schools(request):
 	numChoices = []
 	currentUser = models.account.objects.last()
-	# if request.method == 'POST':
-	# 	if 'numChoicesSubmit' in request.POST:
-	# 		for i in range(int(request.POST['numChoices'])):
-	# 			numChoices.append(i + 1)
-	# 	elif 'selectedUnis' in request.POST:
-	# 		for i in range(len(request.POST) - 2):
-	# 			try:
-	# 				models.School.objects.get(title=request.POST['schoolChoice-' + str(i + 1)])
-	# 			except:
-	# 				s = models.School.objects.create(title=request.POST['schoolChoice-' + str(i + 1)])
-	# 				s.save()
-	# 				currentUser.schools.add(s)
-	# 				currentUser.save()
-	# 			else:
-	# 				currentUser.schools.add(models.School.objects.get(title=request.POST['schoolChoice-' + str(i + 1)]))
-	# 		return redirect('deadlines')
+	selectedSchools = []
 	if request.method == 'POST':
-		for i in range(4):
-			try:
-				models.School.objects.get(title=request.POST['myLink' + str(i + 1)])
-			except:
-				s = models.School.objects.create(title=request.POST['myLink' + str(i + 1)])
-				s.save()
-				currentUser.schools.add(s)
-				currentUser.save()
-			else:
-				currentUser.schools.add(models.School.objects.get(title=request.POST['schoolChoice-' + str(i + 1)]))
+		for i in request.POST:
+			if re.search("selectedSchool-.", i) != None:
+				try:
+					s = models.School.objects.get(title=request.POST[i])
+				except:
+					models.School.objects.create(title=request.POST[i])
+					s = models.School.objects.get(title=request.POST[i])
+					currentUser.schools.add(s)
+				else:
+					currentUser.schools.add(s)
 		return redirect('deadlines')
 
 	uniList = []
@@ -90,14 +74,16 @@ def deadlines(request):
 		return redirect('home')
 	currentUser = models.account.objects.last()
 	context = []
+	print(currentUser.schools.first().title)
 	for school in currentUser.schools.all():
-		with open('world-universities.csv', newline='', encoding='utf-8') as file:
+		with open('us-universities.csv', newline='', encoding='utf-8') as file:
 			fileRead = csv.reader(file, delimiter=',')
 			for row in fileRead:
 				if row[1] == school.title:
 					s = {'school': row[1], 'earlyD': row[3], 'earlyA': row[4], 'regular': row[5]}
 					l = copy.deepcopy(s)
 					context.append(l)
+					break
 			file.close()
 	contextSend = {'content': context}
 	return render(request, 'deadlines.html', contextSend)

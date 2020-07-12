@@ -135,7 +135,8 @@
 
 				 <input type="text"
 				 list="school"
-		     name="schoolChoice"
+		     	 name="schoolChoice"
+		     	 id="schoolChoice"
 				 style="width:300px;"
 				 />
 
@@ -146,15 +147,14 @@
 				</datalist>
 				<br></br>
 				<script>
-				var count = 1;
-				$("input[name=schoolChoice]").focusout(function(){
-						var value = $(this).val();
-						document.getElementById("myLink" + count).innerHTML = value;
-						document.getElementById("checkShow" + count).style.display = "block";
-						document.getElementById("checkShow" + count).style.float = "left";
-						document.getElementById("checkShow" + count).style.width = "200px";
-						document.getElementById("checkShow" + count).style.height = "200px";
+				$(document).ready(function(){
+					var count = 0;
+					$("#schoolChoice").change(function(){
+						var school = $(this).val();
+						$("<input />", {val: school, name: "selectedSchool-" + count}).appendTo("form");
+						$(this).val('');
 						count = count + 1;
+					});
 				});
 				</script>
 
@@ -190,7 +190,7 @@
 				</ul>
 				</div>
 				<br></br>
-				<input type="submit" id ="submitter" name="selectedUnis" position: "fixed">
+				<input type="submit" id ="submitter" name="selectedUnis" position="fixed">
 				</div>
 		</form>
 		<div id="footer"></div>
