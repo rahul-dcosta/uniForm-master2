@@ -74,16 +74,17 @@ def deadlines(request):
 		return redirect('home')
 	currentUser = models.account.objects.last()
 	context = []
-	print(currentUser.schools.first().title)
 	for school in currentUser.schools.all():
 		with open('us-universities.csv', newline='', encoding='utf-8') as file:
-			fileRead = csv.reader(file, delimiter=',')
+			fileRead = csv.reader(file, delimiter='|')
 			for row in fileRead:
-				if row[1] == school.title:
-					s = {'school': row[1], 'earlyD': row[3], 'earlyA': row[4], 'regular': row[5]}
+				print(row[1])
+				if row[0] == school.title:
+					s = {'school': row[0], 'earlyD': row[1], 'earlyA': row[2], 'regular': row[3]}
 					l = copy.deepcopy(s)
 					context.append(l)
 					break
 			file.close()
 	contextSend = {'content': context}
+	print(context)
 	return render(request, 'deadlines.html', contextSend)
