@@ -11,9 +11,12 @@
     <title>University Deadlines</title>
   </head>
   <body>
+    <h1>Your Deadlines</h1>
+    These are the application deadlines for the schools that you selected. If the deadlines of any school have not been displayed below, please give us 24 hours to email you these deadlines once we have entered them into the system. Thank you!
+    <br></br>
 		<p></p>
 		{% for s in content %}
-			<h1>{{s.school}}</h1>
+			<h3><strong>{{s.school}}</strong></h3>
 			<p>Early Decision: {{s.earlyD}}</p>
 			<p>Early Action: {{s.earlyA}}</p>
 			<p>Regular Decision: {{s.regular}}</p>
