@@ -47,6 +47,10 @@ def schools(request):
 		return redirect('deadlines')
 
 	uniList = []
+	# with open('us_institution.csv', newline = '', encoding = 'utf-8') as file:
+	# 	fileRead = csv.reader(file, delimiter=',')
+	# 	for row in fileRead:
+	# 		uniList.append(row[0])
 	with open('world-universities.csv', newline = '', encoding = 'utf-8') as file:
 		fileRead = csv.reader(file, delimiter=',')
 		for row in fileRead:
