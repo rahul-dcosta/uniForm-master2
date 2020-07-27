@@ -10,6 +10,10 @@ class account(models.Model):
 	email = models.CharField(max_length=100)
 	location = models.CharField(max_length=100)
 	schools = models.ManyToManyField(School) # ManyToMany Field is an important data type to understand.
+	takeSAT = models.BooleanField("is SAT", default = False)
+	takeACT = models.BooleanField("is ACT", default = False)
+	takeIELTS = models.BooleanField("is IELTS", default = False)
+	takeTOEFL = models.BooleanField("is TOEFL", default = False)
 
 
 # For foreign key, that specific data entry will be of a type of another class.

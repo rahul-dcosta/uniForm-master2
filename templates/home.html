@@ -2,7 +2,6 @@
 <html>
 	<head>
 
-		<!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -1358,6 +1357,7 @@
 								$(this).val('');
 								count = count + 1;
 								linkCount = linkCount + 1;
+								ui.item.value = "";
             },
             change: function (e, ui) {
                 if (!(freeInput || ui.item)) e.target.value = "";
@@ -1366,21 +1366,6 @@
     }
 
 		autocomplete($('#schoolChoice'), data, function () {});
-		// $(function(){
-		// 	$('#schoolChoice').autocomplete(
-		// 		{
-		//
-		// 		},
-		// 		{
-		// 			autoFocus: false,
-		// 			delay: 0,
-		// 			minLength: 5
-		// 		},
-		// 		change: function(event,ui){
-		// 		  $(this).val((ui.item ? ui.item.id : ""));
-		// 		}
-		// 	);
-		// });
 
 	</script>
 

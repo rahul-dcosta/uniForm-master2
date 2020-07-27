@@ -19,7 +19,11 @@ def home(request):
 		email = request.POST['email']
 		location = request.POST['location']
 		type = request.POST['schoolType']
-		p = models.account.objects.create(fullname=fullname, email=email, location=location)
+		SAT = request.POST['SAT']
+		ACT = request.POST['ACT']
+		TOEFL = request.POST['TOEFL']
+		IELTS = request.POST['IELTS']
+		p = models.account.objects.create(fullname=fullname, email=email, location=location, takeACT=ACT, takeSAT=SAT, takeIELTS=IELTS,takeTOEFL=TOEFL)
 		if type == 'Undergraduate':
 			return redirect('schools/')
 		if type == 'Postgraduate':
@@ -47,10 +51,6 @@ def schools(request):
 		return redirect('deadlines')
 
 	uniList = []
-	# with open('us_institution.csv', newline = '', encoding = 'utf-8') as file:
-	# 	fileRead = csv.reader(file, delimiter=',')
-	# 	for row in fileRead:
-	# 		uniList.append(row[0])
 	with open('world-universities.csv', newline = '', encoding = 'utf-8') as file:
 		fileRead = csv.reader(file, delimiter=',')
 		for row in fileRead:
@@ -89,6 +89,7 @@ def deadlines(request):
 					context.append(l)
 					break
 			file.close()
+
 	contextSend = {'content': context}
 	print(context)
 	return render(request, 'deadlines.html', contextSend)
