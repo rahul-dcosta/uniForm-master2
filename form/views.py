@@ -15,6 +15,7 @@ def home(request):
 				cityList.append(row[0] + ', ' + row[1])
 	request.session['user'] = None
 	if request.method == 'POST':
+		print(request.POST)
 		fullname = request.POST['fullname']
 		email = request.POST['email']
 		location = request.POST['location']
