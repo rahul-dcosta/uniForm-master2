@@ -115,6 +115,16 @@ def deadlines(request):
 					break
 			file.close()
 
-	contextSend = {'content': context}
-	print(context)
+	sat_dates = []
+	# LOOK AT THIS AND TRY TO REPLICATE
+	if currentUser.takeSAT:
+		with open('sat-dates.csv', newline='', encoding='utf-8') as file:
+			fileRead = csv.reader(file, delimiter=',')
+			for row in fileRead:
+				if (row[0] + ', ' + row[1]) == currentUser.location:
+					sat_dates.append(row[2])
+					sat_dates.append(row[3])
+					sat_dates.append(row[4])
+
+	contextSend = {'content': context, 'satDates': sat_dates, 'satCheck': currentUser.takeSAT}
 	return render(request, 'deadlines.html', contextSend)

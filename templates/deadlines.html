@@ -21,6 +21,12 @@
 			<p>Early Action: {{s.earlyA}}</p>
 			<p>Regular Decision: {{s.regular}}</p>
 		{% endfor %}
+    {% if satCheck %}
+      <h2>SAT DATES</h2>
+      {% for s in satDates %}
+        <h4>{{ s }}</h4>
+      {% endfor %}
+    {% endif %}
 		<form method="POST">
 			{%csrf_token%}
 			<input type="submit" name="goBack" value="Back to Home">
