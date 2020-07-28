@@ -19,7 +19,6 @@ def home(request):
 		email = request.POST['email']
 		location = request.POST['location']
 		type = request.POST['schoolType']
-		SAT = request.POST['SAT']
 		ACT = request.POST['ACT']
 		TOEFL = request.POST['TOEFL']
 		IELTS = request.POST['IELTS']
