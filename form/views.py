@@ -15,15 +15,40 @@ def home(request):
 				cityList.append(row[0] + ', ' + row[1])
 	request.session['user'] = None
 	if request.method == 'POST':
-		print(request.POST)
 		fullname = request.POST['fullname']
 		email = request.POST['email']
 		location = request.POST['location']
 		type = request.POST['schoolType']
-		ACT = request.POST['ACT']
-		TOEFL = request.POST['TOEFL']
-		IELTS = request.POST['IELTS']
-		p = models.account.objects.create(fullname=fullname, email=email, location=location, takeACT=ACT, takeSAT=SAT, takeIELTS=IELTS,takeTOEFL=TOEFL)
+		satCheck = False
+		actCheck = False
+		ieltsCheck = False
+		toeflCheck = False
+		try:
+			SAT = request.POST['SAT']
+		except:
+			pass
+		else:
+			satCheck = True
+		try:
+			ACT = request.POST['ACT']
+		except:
+			pass
+		else:
+			actCheck = True
+		try:
+			TOEFL = request.POST['TOEFL']
+		except:
+			pass
+		else:
+			toeflCheck = True
+		try:
+			IELTS = request.POST['IELTS']
+		except:
+			pass
+		else:
+			ieltsCheck = True
+		p = models.account.objects.create(fullname=fullname, email=email, location=location, takeACT=actCheck, takeSAT=satCheck
+			, takeIELTS=ieltsCheck,takeTOEFL=toeflCheck)
 		if type == 'Undergraduate':
 			return redirect('schools/')
 		if type == 'Postgraduate':
